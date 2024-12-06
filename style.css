@@ -33,7 +33,7 @@ body {
   width: 30%;
   height: 30%;
   margin: -15%;
-  background: #fff;
+  background: #007BFF; /* Default background color */
   color: #fff;
   box-shadow: 0 0 0 8px currentColor, 0 0px 15px 5px rgba(0, 0, 0, 0.6);
   border-radius: 50%;
@@ -66,13 +66,6 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Optional: Position it on the left instead */
-.prize-display.left {
-  left: 20px;
-  bottom: auto;
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%);
-}
 .prize-display.hidden {
   opacity: 0;
   visibility: hidden;

@@ -1,9 +1,9 @@
 const sectors = [
-  { color: "#f82", label: "блокнот" },
-  { color: "#0bf", label: "бокс с кометикой" },
-  { color: "#fb0", label: "наушники эпл " },
-  { color: "#0fb", label: "фен Дайсон" },
-  { color: "#b0f", label: "айфон" },
+  { color: "#f82", label: "доступ к платному каналу на месяц" },
+  { color: "#0bf", label: "бокс с косметикой" },
+  { color: "#fb0", label: "наушники Apple" },
+  { color: "#0fb", label: "фен Dyson" },
+  { color: "#b0f", label: "iPhone" },
 ];
 
 const rand = (m, M) => Math.random() * (M - m) + m;
@@ -12,6 +12,7 @@ const spinEl = document.querySelector("#spin");
 const ctx = document.querySelector("#wheel").getContext("2d");
 const prizeEl = document.querySelector("#prize"); // Prize display element
 const prizeDisplayEl = document.querySelector("#prize-display"); // Container for prize display
+const paymentSelect = document.querySelector("#payment-select"); // Payment dropdown
 const dia = ctx.canvas.width;
 const rad = dia / 2;
 const PI = Math.PI;
@@ -45,6 +46,22 @@ function drawSector(sector, i) {
   ctx.restore();
 }
 
+function getPrizeBasedOnPayment() {
+  const payment = parseInt(paymentSelect.value, 10);
+  switch (payment) {
+    case 200:
+      return sectors[1]; // "бокс с косметикой"
+    case 500:
+      return sectors[2]; // "наушники Apple"
+    case 1000:
+      return sectors[3]; // "фен Dyson"
+    case 2000:
+      return sectors[4]; // "iPhone"
+    default:
+      return sectors[0]; // "доступ к платному каналу на месяц"
+  }
+}
+
 function rotate() {
   const sector = sectors[getIndex()];
   ctx.canvas.style.transform = `rotate(${ang - PI / 2}rad)`;
@@ -53,8 +70,8 @@ function rotate() {
 
   // Update the prize display
   if (!angVel) {
-    prizeEl.textContent = sector.label;
-    
+    const prize = getPrizeBasedOnPayment();
+    prizeEl.textContent = prize.label;
 
     // Show the prize display after the first spin
     if (firstSpin) {
